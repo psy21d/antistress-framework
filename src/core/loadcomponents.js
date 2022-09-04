@@ -1,3 +1,10 @@
+/*
+  Apache 2.0 licensed
+  psy21d
+  psy21d@yourfriend.best
+  4.09.2022
+*/
+
 import { defineAsyncComponent, reactive } from 'vue'
 
 let externalComponent = async function(url) {    

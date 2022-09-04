@@ -1,5 +1,14 @@
 # antistress-framework psy21d
 
+```
+/*
+  Apache 2.0 licensed
+  psy21d
+  psy21d@yourfriend.best
+  4.09.2022
+*/
+```
+
 ## Project setup
 ```
 yarn install
@@ -14,11 +23,3 @@ yarn serve
 ```
 yarn build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

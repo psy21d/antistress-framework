@@ -1,13 +1,11 @@
-<template>
-  <component
-    v-if="window.config"
-    :is="getComponentByName(window.config.composition.point, window)"
-    :w="window"
-    :keypr="window.config.composition.point"
-  />
-</template>
-
 <script>
+/*
+  Apache 2.0 licensed
+  psy21d
+  psy21d@yourfriend.best
+  4.09.2022
+*/
+
 import { getComponentByName } from "@/core/service.js";
 
 export default {
@@ -16,3 +14,12 @@ export default {
   },
 };
 </script>
+
+<template>
+  <component
+    v-if="window.config"
+    :is="getComponentByName(window.config.composition.point, window)"
+    :w="window"
+    :keypr="window.config.composition.point"
+  />
+</template>
