@@ -1,13 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <component
+    v-if="window.config"
+    :is="getComponentByName(window.config.composition.point, window)"
+    :w="window"
+    :keypr="window.config.composition.point"
+  />
 </template>
 
 <script>
+import { getComponentByName } from "@/core/service.js";
 
 export default {
-  name: 'App'
-}
+  setup() {
+    return { window, getComponentByName };
+  },
+};
 </script>
-
-<style lang="scss">
-</style>
