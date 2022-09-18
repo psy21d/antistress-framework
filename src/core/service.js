@@ -15,7 +15,7 @@ export const getComponentByName = ({ name, config }) => {
         console.warn(`Component not found: ${ name }. Please check config file.`)
         return
     }
-    return componentsStore[config.components[name].name]
+    return config.components[config.components[name].name]
 }
 
 export const getComponentConfig = ({ name, сonfig }) => {
