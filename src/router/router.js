@@ -6,10 +6,15 @@
 */
 
 import axios from "axios"
-import { loadComponents } from '@/core/loadcomponents.js'
-import { reactive } from 'vue'
-import { set, get } from 'lodash'
+import { loadComponents } from "@/core/loadcomponents.js"
+import { reactive } from "vue"
+import { set, get } from "lodash"
 let configUrl = window.apiUrl !== "%APIURL%" ? window.apiUrl : "https://yourfriend.best:8080/antistress-demo"
+import empty from "@/stand/pages/empty.js"
+
+let window = reactive({
+    ...empty
+});
 
 let localSwitch = (collection) => {
     let query = {}
@@ -118,20 +123,13 @@ let getconfig = () => {
 
 window.getconfig = getconfig
 
-export { localSwitch, updateFromServer, configUpdate, getconfig, setconfig }
+export { localSwitch, updateFromServer, configUpdate, getconfig, setconfig, window }
 
 window.switch = localSwitch
 window.update = updateFromServer
 
+
+// start application
 if (window.apiUrl !== "%APIURL%") {
     getconfig()
-} else {
-    setconfig({
-        components: {
-        },
-        methods: {},
-        composition: {
-            point: "empty",
-        },
-    });
 }

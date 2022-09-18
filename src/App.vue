@@ -7,6 +7,7 @@
 */
 
 import { getComponentByName } from "@/core/service.js";
+import window from "@/router/router.js"
 
 export default {
   setup() {
@@ -19,7 +20,7 @@ export default {
   <component
     v-if="window.config"
     :is="getComponentByName(window.config.composition.point, window)"
-    :w="window"
+    :w="window.config"
     :keypr="window.config.composition.point"
   />
 </template>
