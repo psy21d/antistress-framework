@@ -70,7 +70,7 @@ export default {
         }
     },
     composition: {
-        point: "box"
+        point: "gridbox"
     },
     store: {
         "card-item-01": {

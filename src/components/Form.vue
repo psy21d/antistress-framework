@@ -9,12 +9,11 @@
 import { 
   getComponentByName, 
   getComponentConfig,
-  getIndividualConfig
 } from "@/core/service.js";
 
 export default {
   props: [
-    "keypr",
+    "store",
     "w",
   ],
   setup(props) {

@@ -9,10 +9,10 @@ import axios from "axios"
 import { loadComponents } from "@/core/loadcomponents.js"
 import { reactive } from "vue"
 import { set, get } from "lodash"
-let configUrl = window.apiUrl !== "%APIURL%" ? window.apiUrl : "https://yourfriend.best:8080/antistress-demo"
+let configUrl = window.apiUrl !== "%APIURL%" ? window.apiUrl : "http://yourfriend.best/antistress-demo"
 import empty from "@/stand/pages/empty.js"
 
-let window = reactive({
+let w = reactive({
     ...empty
 });
 
@@ -21,7 +21,7 @@ let localSwitch = (collection) => {
     query.query = {}
     if (collection.storeKeys !== undefined) {
         collection.storeKeys.forEach((key) => {
-            set(query.query, key, get(window.config, key))
+            set(query.query, key, get(w, key))
         })
     }
     const toSend = { ...query, ...collection }
@@ -63,39 +63,43 @@ let keysFromJson = (json) => {
 }
 
 let configUpdate = (config) => {
-    window.config = window.config ? window.config : reactive({ ...config })
-    window.store = window.config.store ? window.config.store : {}
+    if (typeof config === "string") {
+        config = JSON.parse(config)
+    }
+
+    w = w ? w : reactive({ ...config })
+    w.store = w.store ? w.store : {}
 
     let keysCollection = keysFromJson(config).filter((key) => {
         return !(typeof get(config, key) === 'object')
     })
 
-    window.config.workingMethods = {
-        ...window.config.workingMethods
+    w.workingMethods = {
+        ...w.workingMethods
     }
 
-    window.config.workingMethods.switch = localSwitch;
+    w.workingMethods.switch = localSwitch;
 
-    Object.keys(window.config.components).forEach((key) => {
-        if (window.config.components[key].attributes &&
-            window.config.components[key].attributes.components &&
+    Object.keys(w.components).forEach((key) => {
+        if (w.components[key].attributes &&
+            w.components[key].attributes.components &&
             config.components &&
             config.components[key] &&
             typeof config.components[key].attributes === "object" &&
             typeof config.components[key].attributes.components === "object"
         ) {
-            window.config.components[key].attributes.components = config.components[key].attributes.components
+            w.components[key].attributes.components = config.components[key].attributes.components
         }
     })
 
     keysCollection.forEach((key) => {
-        set(window.config, key, get(config, key))
+        set(w, key, get(config, key))
     })
 
     // if switch f in config, then will be setup from conf
-    Object.keys(window.config.methods).forEach((key) => {
-        window.config.workingMethods[key] =
-            new Function("return " + window.config.methods[key])()
+    Object.keys(w.methods || []).forEach((key) => {
+        w.workingMethods[key] =
+            new Function("return " + w.methods[key])()
     })
 
     if (config.components) loadComponents(config)
@@ -109,7 +113,7 @@ let setconfig = (config) => {
     configUpdate(config);
 }
 
-window.setconfig = setconfig
+w.setconfig = setconfig
 
 // --------------------
 
@@ -121,15 +125,11 @@ let getconfig = () => {
         });
 }
 
-window.getconfig = getconfig
+w.getconfig = getconfig
 
-export { localSwitch, updateFromServer, configUpdate, getconfig, setconfig, window }
+export { localSwitch, updateFromServer, configUpdate, getconfig, setconfig, w }
 
-window.switch = localSwitch
-window.update = updateFromServer
+w.switch = localSwitch
+w.update = updateFromServer
 
-
-// start application
-if (window.apiUrl !== "%APIURL%") {
-    getconfig()
-}
+window.w = w;

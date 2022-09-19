@@ -7,20 +7,27 @@
 */
 
 import { getComponentByName } from "@/core/service.js";
-import window from "@/router/router.js"
+import { w } from "@/router/router.js"
+import roli from "@/stand/pages/roli.js"
+// start application
+// if (w.apiUrl !== "%APIURL%") {
+//     w.getconfig()
+// } 
+
+w.setconfig(roli)
 
 export default {
   setup() {
-    return { window, getComponentByName };
+    return { w, getComponentByName };
   },
 };
 </script>
 
 <template>
   <component
-    v-if="window.config"
-    :is="getComponentByName(window.config.composition.point, window)"
-    :w="window.config"
-    :keypr="window.config.composition.point"
+    v-if="w"
+    :is="getComponentByName({name: w.composition.point, config: w})"
+    :w="w"
+    :store="w.composition.point"
   />
 </template>

@@ -13,14 +13,13 @@ import {
 
 export default {
     props: [
-        // ключ компонента в сторе,
-        'store',
-        'w',
+        'store', // key store
+        'config',
         'storedata'
     ],
     setup(props) {
         let componentConfig = getComponentConfig(props.store, props.w);
-        return { w: props.w, ...props, props, componentConfig, ...componentConfig }
+        return { ...props, props, componentConfig, ...componentConfig }
     }
 }
 
@@ -28,8 +27,8 @@ export default {
 
 <template>
     <span
-        :style="makeLinksWithStore(w, componentConfig.style)"
-        :class="makeLinksWithStore(w, componentConfig.class)"
+        :style="makeLinksWithStore({ config, json: componentConfig.style })"
+        :class="makeLinksWithStore({ config, json: componentConfig.class })"
     > {{
         props.storedata['default'] ||
         props.storedata[store] ||
