@@ -7,65 +7,112 @@
   last upd 18.09.2022
 */
 import { 
-  getComponentByName, 
-  getComponentConfig,
+  getComponentByName,
+  getSomeValueFromStore,
 } from "@/core/service.js";
 
 export default {
   props: [
     "store",
-    "w",
+    "config",
+    "componentConfig"
   ],
   setup(props) {
-    try {
-      let window = typeof window === "object" ? window : props.w;
-    } catch (e) {
-      console.log(e);
+
+    console.log(props.config)
+
+    let mixedstore = {
+        ...props.config.store,
+        ...props.config.store[props.componentConfig ? props.componentConfig.storedata : null],
+        ...(props.componentConfig ? props.componentConfig.storemix : undefined)
     }
 
-    let config = getComponentConfig(props.keypr, window);
+    console.log(mixedstore)
+    console.log(props.config.components)
 
-    let clist = config.attributes.components;
+    debugger;
 
-    // Передавать в компонент именно микс: конфиг частичный и keypr
-    // Далее компонент готовит себе по сервисной функции реактивный конфиг слитный
+    console.log(props.componentConfig)
+    console.log(props.componentConfig.components)
 
-    // Это нужно для того, чтобы не объявлять миллион компонентов на 1 уровне,
-    // а пользоваться компонентом в частном (например, заменить ему store)
+    console.log(getSomeValueFromStore(
+          { 
+            store: mixedstore, 
+            value: props.componentConfig ? 
+              props.componentConfig.components : undefined
+          }
+      )
+    )
+
+    debugger;
 
     return {
-      window,
-      clist,
+      clist: (
+        getSomeValueFromStore(
+          { 
+            store: {
+                ...props.config.store,
+                ...props.config.store[props.componentConfig ? props.componentConfig.storedata : null],
+                ...(props.componentConfig ? props.componentConfig.storemix : undefined)
+            }, 
+            value: props.componentConfig ? 
+              props.componentConfig.components : undefined
+          }
+      )
+      ),
+      props,
       ...props,
       getComponentByName,
-      ...config,
-      config,
-    };
+      };
   },
 };
 </script>
 
 <template>
+  <!-- {{ config }}
+  <br /><br /><br /><br />
+  {{ componentConfig }}
+  <br /><br /><br /><br /> -->
   <div
     v-if="config.style || config.class"
-    :style="config.style ? config.style : {}"
-    :class="config.class ? config.class : {}"
+    :style="makeLinksWithStore({ config, json: { ...componentConfig.style } })"
+    :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
   >
     <component
-      :keypr="c.key"
-      :w="window"
+      :key="c"
+      :store="
+        componentConfig.storemix? componentConfig.storemix.store : undefined ||
+        c.store ||
+        componentConfig.store
+      "
+      :storedata="{
+        ...config.store,
+        ...config.store[componentConfig ? componentConfig.storedata : null],
+        ...(componentConfig ? componentConfig.storemix : undefined)
+      }"
+      :config="config"
+      :componentConfig="{ ...config.components[c.name], ...c }"
       v-for="c in clist"
-      :is="getComponentByName(c.key, window)"
-      :key="c.key"
+      :is="getComponentByName({ name: c.name, config })"
     />
   </div>
   <template v-else>
     <component
-      :keypr="c.key"
-      :w="window"
+      :key="c"
+      :store="
+        componentConfig.storemix ? componentConfig.storemix.store : undefined ||
+        c.store ||
+        componentConfig.store
+      "
+      :storedata="{
+        ...config.store,
+        ...config.store[componentConfig ? componentConfig.storedata : null],
+        ...(componentConfig ? componentConfig.storemix : undefined)
+      }"
+      :config="config"
+      :componentConfig="{ ...config.components[c.name], ...c }"
       v-for="c in clist"
-      :is="getComponentByName(c.key, window)"
-      :key="c.key"
+      :is="getComponentByName({ name: c.name, config })"
     />
   </template>
 </template>

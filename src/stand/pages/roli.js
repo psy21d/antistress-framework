@@ -12,18 +12,25 @@ export default {
             "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.min.js",
             components: [
                 {
-                    key: "card",
-                    storemix: "card-item-01"
+                    name: "card",
+                    storedata: "card-item-01",
+                    storemix: {
+                        maintext: "From card-item-01",
+                    }
                 },
                 {
-                    key: "card",
-                    storemix: "card-item-02"
+                    name: "card",
+                    storedata: "card-item-02"
                 },
                 {
-                    key: "card",
-                    storemix: "card-item-03"
+                    name: "card",
+                    storedata: "card-item-03"
                 },
-            ]                
+            ],
+            storedata: "gridbox",
+            storemix: {
+                maintext: "!!! Seaboard RISE 2: First Touch | Madeon",
+            }
         },
         photo: {
             "name": "Span-0",
@@ -38,14 +45,14 @@ export default {
             // important: we can get it from config directly
             components: [
                 {
-                    key: "photo",
+                    name: "photo",
                 },
                 {
-                    key: "textcard",
+                    name: "maintext",
                 },
                 {
-                    key: "tags",
-                }
+                    name: "textcard",
+                },
             ],
         },
         textcard: {
@@ -73,23 +80,26 @@ export default {
         point: "gridbox"
     },
     store: {
+        "gridbox": {
+            reactivetest01: "A",
+        },
         "card-item-01": {
             tags: [
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag1",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag2",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag3",
                 }
             ],
             "card-image": "https://d1ag85ptixulvl.cloudfront.net/k28kmvrzx80m/6IFVQ6rYVvx1YCVjn3FJSj/61876da0e6ed85da38aa04c75ed33ee3/Screenshot_2022-08-03_at_09.22.17.png?w=512&q=90&fl=progressive&fit=fill&h=332",
-            maintext: "Seaboard RISE 2: First Touch | Madeon",
+            //maintext: "Seaboard RISE 2: First Touch | Madeon",
             date: "August 4th 2022",
             tag1: "Artists",
             tag2: "Features",
@@ -98,15 +108,15 @@ export default {
         "card-item-02": {
             tags: [
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag1",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag2",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag3",
                 }
             ],
@@ -120,15 +130,15 @@ export default {
         "card-item-03": {
             tags: [
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag1",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag2",
                 },
                 {
-                    key: "tag",
+                    name: "tag",
                     store: "tag3",
                 }
             ],

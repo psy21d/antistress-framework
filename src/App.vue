@@ -3,10 +3,11 @@
   Apache 2.0 licensed
   psy21d
   psy21d@yourfriend.best
-  4.09.2022
+  first upd 4.09.2022
+  last upd 24.09.2022
 */
 
-import { getComponentByName } from "@/core/service.js";
+import { getComponentByName, getComponentConfig } from "@/core/service.js";
 import { w } from "@/router/router.js"
 import roli from "@/stand/pages/roli.js"
 // start application
@@ -18,7 +19,14 @@ w.setconfig(roli)
 
 export default {
   setup() {
-    return { w, getComponentByName };
+    console.log(w)
+    let mixedstore = {
+      ...w.store,
+      ...w.store[w.components[w.composition.point].storedata],
+      ...w.components[w.composition.point].storemix
+    }
+    console.log(mixedstore)
+    return { w, getComponentByName, getComponentConfig };
   },
 };
 </script>
@@ -28,6 +36,13 @@ export default {
     v-if="w"
     :is="getComponentByName({name: w.composition.point, config: w})"
     :w="w"
-    :store="w.composition.point"
+    :name="w.composition.point"
+    :config="w"
+    :componentConfig="w.components[w.composition.point]"
+    :storedata="{
+      ...w.store,
+      ...w.store[w.components[w.composition.point].storedata],
+      ...w.components[w.composition.point].storemix
+    }"
   />
 </template>

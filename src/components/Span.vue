@@ -6,20 +6,18 @@
       first upd 4.09.2022
       last upd 18.09.2022
     */
-import { 
-    getComponentConfig, 
+import {
     makeLinksWithStore 
-} from '@/service/service.js';
+} from '@/core/service.js';
 
 export default {
     props: [
-        'store', // key store
-        'config',
-        'storedata'
+        "store",
+        "config",
+        "componentConfig"
     ],
     setup(props) {
-        let componentConfig = getComponentConfig(props.store, props.w);
-        return { ...props, props, componentConfig, ...componentConfig }
+        return { props, ...props, makeLinksWithStore }
     }
 }
 
@@ -27,12 +25,15 @@ export default {
 
 <template>
     <span
-        :style="makeLinksWithStore({ config, json: componentConfig.style })"
-        :class="makeLinksWithStore({ config, json: componentConfig.class })"
-    > {{
-        props.storedata['default'] ||
-        props.storedata[store] ||
-        window.store[componentConfig.store]
+        :style="makeLinksWithStore({ config, json: { ...componentConfig.style } })"
+        :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
+    >
+    {{ componentConfig }}
+    {{ store }}
+    {{
+        componentConfig.store ? componentConfig.store['default'] : undefined ||
+        componentConfig.store ? componentConfig.store[store] : undefind||
+        config.store[componentConfig.store]
     }}
     </span>
 </template>

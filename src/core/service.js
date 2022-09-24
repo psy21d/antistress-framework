@@ -3,10 +3,11 @@
   psy21d
   psy21d@yourfriend.best
   first upd 4.09.2022
-  last upd 18.09.2022
+  last upd 24.09.2022
 */
 
 export const getComponentByName = ({ name, config }) => {
+    let x = config;
     if (!( 
             config && 
             config.components && 
@@ -15,11 +16,17 @@ export const getComponentByName = ({ name, config }) => {
         console.warn(`Component not found: ${ name }. Please check config file.`)
         return
     }
-    return config.components[config.components[name].name]
+    x;
+    return config.componentsStore[config.components[name].name]
 }
 
-export const getComponentConfig = ({ name, сonfig }) => {
-    return сonfig.components[name]
+export const getComponentConfig = (d) => {
+    let { name, config } = d
+    return config.components[name]
+}
+
+export const getStoreData = ({ name, config }) => {
+    return config.components[name]
 }
 
 export const getMethodByEvent = ({ methods, eventType }) => {
@@ -39,6 +46,7 @@ export const getTextMethodByEvent = ({ config, methods, eventType }) => {
 }
 
 export const getSomeValueFromStore = ({ config, value }) => {
+    debugger
     if (typeof value === "string") {
         if (value[0] === "@") {
             debugger;
@@ -50,6 +58,7 @@ export const getSomeValueFromStore = ({ config, value }) => {
         return value
     }
 }
+
 
 export const makeLinksWithStore = ({ config, json }) => {
     return Object.keys(json).map(key => {
