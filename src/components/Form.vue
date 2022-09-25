@@ -15,44 +15,18 @@ export default {
   props: [
     "store",
     "config",
-    "componentConfig"
+    "storemix",
+    "componentConfig",
   ],
   setup(props) {
-
-    console.log(props.config)
-
-    let mixedstore = {
-        ...props.config.store,
-        ...props.config.store[props.componentConfig ? props.componentConfig.storedata : null],
-        ...(props.componentConfig ? props.componentConfig.storemix : undefined)
-    }
-
-    console.log(mixedstore)
-    console.log(props.config.components)
-
-    debugger;
-
-    console.log(props.componentConfig)
-    console.log(props.componentConfig.components)
-
-    console.log(getSomeValueFromStore(
-          { 
-            store: mixedstore, 
-            value: props.componentConfig ? 
-              props.componentConfig.components : undefined
-          }
-      )
-    )
-
-    debugger;
-
     return {
       clist: (
         getSomeValueFromStore(
           { 
             store: {
                 ...props.config.store,
-                ...props.config.store[props.componentConfig ? props.componentConfig.storedata : null],
+                ...props.storemix,
+                ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
                 ...(props.componentConfig ? props.componentConfig.storemix : undefined)
             }, 
             value: props.componentConfig ? 
@@ -85,9 +59,10 @@ export default {
         c.store ||
         componentConfig.store
       "
-      :storedata="{
-        ...config.store,
-        ...config.store[componentConfig ? componentConfig.storedata : null],
+      :storedata="componentConfig.storedata"
+      :storemix="{
+        ...props.storemix,
+        ...config.store[componentConfig ? componentConfig.storedata : undefined],
         ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"
@@ -104,9 +79,10 @@ export default {
         c.store ||
         componentConfig.store
       "
-      :storedata="{
-        ...config.store,
-        ...config.store[componentConfig ? componentConfig.storedata : null],
+      :storedata="componentConfig.storedata"
+      :storemix="{
+        ...props.storemix,
+        ...config.store[componentConfig ? componentConfig.storedata : undefined],
         ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"

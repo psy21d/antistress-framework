@@ -9,7 +9,7 @@ export default {
     components: {
         gridbox: {
             "name": "Form-0",
-            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
             components: [
                 {
                     name: "card",
@@ -34,14 +34,14 @@ export default {
         },
         photo: {
             "name": "Span-0",
-            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
             style: {
                 "background-image": "@card-image"
             }
         },
         card: {
             "name": "Form-0",
-            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
             // important: we can get it from config directly
             components: [
                 {
@@ -57,23 +57,23 @@ export default {
         },
         textcard: {
             "name": "Form-0",
-            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
             // important: we can get it from config directly
             components: "@tags",
         },
         maintext: {
             "name": "Span-0",
-            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
             store: "maintext"
         },
         date: {
             "name": "Span-0",
-            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
             store: "date"
         },
         tag: {
             "name": "Span-0",
-            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.min.js",
+            "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
         }
     },
     composition: {

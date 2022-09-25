@@ -45,12 +45,10 @@ export const getTextMethodByEvent = ({ config, methods, eventType }) => {
     return () => { }
 }
 
-export const getSomeValueFromStore = ({ config, value }) => {
-    debugger
+export const getSomeValueFromStore = ({store, value }) => {
     if (typeof value === "string") {
         if (value[0] === "@") {
-            debugger;
-            return config.store[value.substring(1)]
+            return store[value.substring(1)]
         } else {
             return value
         }
@@ -62,6 +60,6 @@ export const getSomeValueFromStore = ({ config, value }) => {
 
 export const makeLinksWithStore = ({ config, json }) => {
     return Object.keys(json).map(key => {
-        return getSomeValueFromStore({ config, value: json[key][0] })
+        return getSomeValueFromStore({ store: config.store, value: json[key] })
     })
 }

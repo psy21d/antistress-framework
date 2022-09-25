@@ -14,7 +14,8 @@ export default {
     props: [
         "store",
         "config",
-        "componentConfig"
+        "storemix",
+        "componentConfig",
     ],
     setup(props) {
         return { props, ...props, makeLinksWithStore }
@@ -28,12 +29,8 @@ export default {
         :style="makeLinksWithStore({ config, json: { ...componentConfig.style } })"
         :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
     >
-    {{ componentConfig }}
-    {{ store }}
     {{
-        componentConfig.store ? componentConfig.store['default'] : undefined ||
-        componentConfig.store ? componentConfig.store[store] : undefind||
-        config.store[componentConfig.store]
+        { ...config.store, ...storemix }[store]
     }}
     </span>
 </template>

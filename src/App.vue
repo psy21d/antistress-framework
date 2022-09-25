@@ -21,7 +21,6 @@ export default {
   setup() {
     console.log(w)
     let mixedstore = {
-      ...w.store,
       ...w.store[w.components[w.composition.point].storedata],
       ...w.components[w.composition.point].storemix
     }
@@ -39,8 +38,7 @@ export default {
     :name="w.composition.point"
     :config="w"
     :componentConfig="w.components[w.composition.point]"
-    :storedata="{
-      ...w.store,
+    :storemix="{
       ...w.store[w.components[w.composition.point].storedata],
       ...w.components[w.composition.point].storemix
     }"
