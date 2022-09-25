@@ -4,6 +4,9 @@ scp -r ~/Projects/antistress-framework/src/components/build/Form* psy21d@yourfri
 npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/Span --name "Span-0" src/components/Span.vue 
 scp -r ~/Projects/antistress-framework/src/components/build/Span* psy21d@yourfriend.best:~/antistress/components
 
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/Div --name "Div-0" src/components/Div.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/Div* psy21d@yourfriend.best:~/antistress/components
+
 npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/PrimeButton --name "PrimeButton-0" src/components/PrimeButton.vue 
 scp -r ~/Projects/antistress-framework/src/components/build/PrimeButton* psy21d@yourfriend.best:~/antistress/components
 

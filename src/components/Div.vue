@@ -3,7 +3,7 @@
       Apache 2.0 licensed
       psy21d
       psy21d@yourfriend.best
-      first upd 4.09.2022
+      first upd 26.09.2022
       last upd 26.09.2022
     */
 import {
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <template>
-    <span
+    <div
         :style="makeLinksWithStore({ 
             store: {
                 ...config.store, 
@@ -79,6 +79,6 @@ export default {
         ( { ...config.store, ...storemix }[store] ||
         { ...config.store, ...storemix }[componentConfig.store])
     }}
-    </span>
+    </div>
 </template>
 

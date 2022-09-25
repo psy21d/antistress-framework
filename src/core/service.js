@@ -3,8 +3,9 @@
   psy21d
   psy21d@yourfriend.best
   first upd 4.09.2022
-  last upd 24.09.2022
+  last upd 26.09.2022
 */
+import { reactive } from "vue"
 
 export const getComponentByName = ({ name, config }) => {
     let x = config;
@@ -58,8 +59,11 @@ export const getSomeValueFromStore = ({store, value }) => {
 }
 
 
-export const makeLinksWithStore = ({ config, json }) => {
-    return Object.keys(json).map(key => {
-        return getSomeValueFromStore({ store: config.store, value: json[key] })
+export const makeLinksWithStore = ({store, json }) => {
+    let r = reactive({})
+    debugger;
+    Object.keys(json).forEach(key => {
+        r[key] = getSomeValueFromStore({ store, value: json[key] })
     })
+    return r;
 }
