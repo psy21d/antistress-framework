@@ -1,0 +1,15 @@
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/Form --name "Form-0" src/components/Form.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/Form* psy21d@yourfriend.best:~/antistress/components
+
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/Span --name "Span-0" src/components/Span.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/Span* psy21d@yourfriend.best:~/antistress/components
+
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/PrimeButton --name "PrimeButton-0" src/components/PrimeButton.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/PrimeButton* psy21d@yourfriend.best:~/antistress/components
+
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/PrimeMultiselect --name "PrimeMultiselect-0" src/components/PrimeMultiselect.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/PrimeMultiselect* psy21d@yourfriend.best:~/antistress/components
+
+npx vue-cli-service build --target lib --formats umd --no-clean --dest src/components/build/Empty --name "Empty-0" src/components/Empty.vue 
+scp -r ~/Projects/antistress-framework/src/components/build/Empty* psy21d@yourfriend.best:~/antistress/components
+

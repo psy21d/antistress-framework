@@ -5,7 +5,8 @@
   4.09.2022
 */
 
-import { defineAsyncComponent, reactive } from 'vue'
+import { defineAsyncComponent, reactive } from "vue"
+import { w } from "@/router/router.js"
 
 let externalComponent = async function(url) {    
     const name = url.split('/').reverse()[0].match(/^(.*?)\.umd/)[1];
@@ -13,12 +14,12 @@ let externalComponent = async function(url) {
     if (window[name]) return window[name];
   
     window[name] = new Promise((resolve, reject) => {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.async = true;
-      script.addEventListener('load', () => {
+      script.addEventListener("load", () => {
         resolve(window[name]);
       });
-      script.addEventListener('error', () => {
+      script.addEventListener("error", () => {
         reject(new Error(`Error loading ${url}`));
       });
       script.src = url;
@@ -29,10 +30,10 @@ let externalComponent = async function(url) {
 }
 
 let loadComponents = (config) => {
-    window.componentsStore = window.componentsStore ? window.componentsStore : reactive({})
+    w.componentsStore = w.componentsStore ? w.componentsStore : reactive({})
     Object.keys(config.components).forEach((c) => {
         let LC = () => externalComponent(config.components[c].url);
-        window.componentsStore[config.components[c].name] = defineAsyncComponent(() => { 
+        w.componentsStore[config.components[c].name] = defineAsyncComponent(() => { 
             return new Promise((resolve) => {
                 // ...load component from server
                 resolve(LC())
