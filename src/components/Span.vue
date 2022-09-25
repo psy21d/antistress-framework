@@ -30,7 +30,8 @@ export default {
         :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
     >
     {{
-        { ...config.store, ...storemix }[store]
+        ( { ...config.store, ...storemix }[store] ||
+        { ...config.store, ...storemix }[componentConfig.store])
     }}
     </span>
 </template>
