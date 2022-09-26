@@ -9,6 +9,7 @@
 import { 
   getComponentByName,
   getSomeValueFromStore,
+  makeLinksWithStore,
 } from "@/core/service.js";
 
 export default {
@@ -19,6 +20,16 @@ export default {
     "componentConfig",
   ],
   setup(props) {
+    let storemix={
+        ...props.storemix,
+        ...(props.componentConfig ? props.componentConfig.storemix : undefined),
+        ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
+      }
+      console.log(storemix);
+      console.log(props.storemix);
+      console.log(props.componentConfig ? props.componentConfig.storemix : undefined)
+      console.log(props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined])
+
     return {
       clist: (
         getSomeValueFromStore(
@@ -26,8 +37,8 @@ export default {
             store: {
                 ...props.config.store,
                 ...props.storemix,
+                ...(props.componentConfig ? props.componentConfig.storemix : undefined),
                 ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
-                ...(props.componentConfig ? props.componentConfig.storemix : undefined)
             }, 
             value: props.componentConfig ? 
               props.componentConfig.components : undefined
@@ -37,6 +48,7 @@ export default {
       props,
       ...props,
       getComponentByName,
+      makeLinksWithStore,
       };
   },
 };
@@ -48,10 +60,11 @@ export default {
   {{ componentConfig }}
   <br /><br /><br /><br /> -->
   <div
-    v-if="config.style || config.class"
-    :style="makeLinksWithStore({ config, json: { ...componentConfig.style } })"
-    :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
+    v-if="componentConfig.style || componentConfig.class"
+    :style="makeLinksWithStore({ store: config.store, json: { ...componentConfig.style } })"
+    :class="makeLinksWithStore({ store: config.store, json: { ...componentConfig.class } })"
   >
+  {{ config.style }}
     <component
       :key="c"
       :store="
@@ -61,9 +74,9 @@ export default {
       "
       :storedata="componentConfig.storedata"
       :storemix="{
-        ...props.storemix,
+        ...storemix,
+        ...(componentConfig ? componentConfig.storemix : undefined),
         ...config.store[componentConfig ? componentConfig.storedata : undefined],
-        ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"
       :componentConfig="{ ...config.components[c.name], ...c }"
@@ -81,9 +94,9 @@ export default {
       "
       :storedata="componentConfig.storedata"
       :storemix="{
-        ...props.storemix,
+        ...storemix,
+        ...(componentConfig ? componentConfig.storemix : undefined),
         ...config.store[componentConfig ? componentConfig.storedata : undefined],
-        ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"
       :componentConfig="{ ...config.components[c.name], ...c }"

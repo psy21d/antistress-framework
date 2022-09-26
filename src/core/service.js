@@ -3,8 +3,9 @@
   psy21d
   psy21d@yourfriend.best
   first upd 4.09.2022
-  last upd 24.09.2022
+  last upd 26.09.2022
 */
+import { reactive } from "vue"
 
 export const getComponentByName = ({ name, config }) => {
     let x = config;
@@ -20,11 +21,6 @@ export const getComponentByName = ({ name, config }) => {
     return config.componentsStore[config.components[name].name]
 }
 
-export const getComponentConfig = (d) => {
-    let { name, config } = d
-    return config.components[name]
-}
-
 export const getStoreData = ({ name, config }) => {
     return config.components[name]
 }
@@ -35,13 +31,13 @@ export const getMethodByEvent = ({ methods, eventType }) => {
 
 export const getWorkingMethod = ({ config, methods, eventType }) => {
     if (config.methods && config.workingMethods[methods[eventType]])
-        return config.workingMethods[getMethodByEvent(methods, eventType)]
+        return config.workingMethods[getMethodByEvent({ methods, eventType })]
     return () => { }
 }
 
 export const getTextMethodByEvent = ({ config, methods, eventType }) => {
     if (config.methods && config.workingMethods[methods[eventType]])
-        return getMethodByEvent(methods, eventType)
+        return getMethodByEvent({ methods, eventType })
     return () => { }
 }
 
@@ -58,8 +54,10 @@ export const getSomeValueFromStore = ({store, value }) => {
 }
 
 
-export const makeLinksWithStore = ({ config, json }) => {
-    return Object.keys(json).map(key => {
-        return getSomeValueFromStore({ store: config.store, value: json[key] })
+export const makeLinksWithStore = ({store, json }) => {
+    let r = reactive({})
+    Object.keys(json).forEach(key => {
+        r[key] = getSomeValueFromStore({ store, value: json[key] })
     })
+    return r;
 }
