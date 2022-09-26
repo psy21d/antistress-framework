@@ -18,32 +18,6 @@ export default {
         "componentConfig",
     ],
     setup(props) {
-        console.log(
-            makeLinksWithStore(
-                { 
-                    store: {
-                        ...props.config.store, 
-                        ...(props.componentConfig && props.componentConfig.storedata) ?
-                            props.componentConfig.storedata[props.store] : undefined,
-                        ...props.storemix 
-                    }, 
-                    json: { ...props.componentConfig.style } 
-                }
-            )
-        )
-        console.log(
-            makeLinksWithStore(
-                { 
-                    store: {
-                        ...props.config.store, 
-                        ...(props.componentConfig && props.componentConfig.storedata) ?
-                            props.componentConfig.storedata[props.store] : undefined,
-                        ...props.storemix 
-                    }, 
-                    json: { ...props.componentConfig.class } 
-                }
-            )
-        )
         return { props, ...props, makeLinksWithStore }
     }
 }

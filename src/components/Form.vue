@@ -20,15 +20,15 @@ export default {
     "componentConfig",
   ],
   setup(props) {
-    let storemix={
-        ...props.storemix,
-        ...(props.componentConfig ? props.componentConfig.storemix : undefined),
-        ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
-      }
-      console.log(storemix);
-      console.log(props.storemix);
-      console.log(props.componentConfig ? props.componentConfig.storemix : undefined)
-      console.log(props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined])
+    // let storemix={
+    //     ...props.storemix,
+    //     ...(props.componentConfig ? props.componentConfig.storemix : undefined),
+    //     ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
+    //   }
+    //   console.log(storemix);
+    //   console.log(props.storemix);
+    //   console.log(props.componentConfig ? props.componentConfig.storemix : undefined)
+    //   console.log(props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined])
 
     return {
       clist: (

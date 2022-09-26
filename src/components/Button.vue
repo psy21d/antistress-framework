@@ -56,8 +56,6 @@ export default {
           ...props.storemix 
       }[props.componentConfig.store]
       ))
-      debugger;
-
 
     return {
       props,

@@ -19,12 +19,6 @@ w.setconfig(roli)
 
 export default {
   setup() {
-    console.log(w)
-    let mixedstore = {
-      ...w.store[w.components[w.composition.point].storedata],
-      ...w.components[w.composition.point].storemix
-    }
-    console.log(mixedstore)
     return { w, getComponentByName, getComponentConfig };
   },
 };
