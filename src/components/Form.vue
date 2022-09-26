@@ -20,6 +20,16 @@ export default {
     "componentConfig",
   ],
   setup(props) {
+    let storemix={
+        ...props.storemix,
+        ...(props.componentConfig ? props.componentConfig.storemix : undefined),
+        ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
+      }
+      console.log(storemix);
+      console.log(props.storemix);
+      console.log(props.componentConfig ? props.componentConfig.storemix : undefined)
+      console.log(props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined])
+
     return {
       clist: (
         getSomeValueFromStore(
@@ -27,8 +37,8 @@ export default {
             store: {
                 ...props.config.store,
                 ...props.storemix,
+                ...(props.componentConfig ? props.componentConfig.storemix : undefined),
                 ...props.config.store[props.componentConfig ? props.componentConfig.storedata : undefined],
-                ...(props.componentConfig ? props.componentConfig.storemix : undefined)
             }, 
             value: props.componentConfig ? 
               props.componentConfig.components : undefined
@@ -64,9 +74,9 @@ export default {
       "
       :storedata="componentConfig.storedata"
       :storemix="{
-        ...props.storemix,
+        ...storemix,
+        ...(componentConfig ? componentConfig.storemix : undefined),
         ...config.store[componentConfig ? componentConfig.storedata : undefined],
-        ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"
       :componentConfig="{ ...config.components[c.name], ...c }"
@@ -84,9 +94,9 @@ export default {
       "
       :storedata="componentConfig.storedata"
       :storemix="{
-        ...props.storemix,
+        ...storemix,
+        ...(componentConfig ? componentConfig.storemix : undefined),
         ...config.store[componentConfig ? componentConfig.storedata : undefined],
-        ...(componentConfig ? componentConfig.storemix : undefined)
       }"
       :config="config"
       :componentConfig="{ ...config.components[c.name], ...c }"

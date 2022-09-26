@@ -71,7 +71,7 @@ export default {
                     name: "maintext",
                 },
                 {
-                    name: "textcard",
+                    name: "card-date-and-tags"
                 },
             ],
             style: {
@@ -86,6 +86,9 @@ export default {
                 "border": "1px solid #ccc",
                 "border-radius": "8px",
                 overflow: "hidden",
+            },
+            storemix: {
+                maintext: "From card-component",
             }
         },
         textcard: {
@@ -95,11 +98,11 @@ export default {
             components: "@tags",
             style: {
                 "flex-grow": "0.2",
-                "padding": "24px",
-                "padding-top": "0",
+                "padding": "0",
                 "gap": "12px",
                 "display": "flex",
-                "justify-items": "row"
+                "justify-items": "center",
+                "flex-glow": "row"
             }
         },
         maintext: {
@@ -115,6 +118,32 @@ export default {
             "name": "Span-0",
             "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
             store: "date"
+        },
+        "card-date-and-tags": {
+            "name": "Form-0",
+            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
+            components: [
+                {
+                    name: "date",
+                },
+                {
+                    name: "textcard",
+                    style: {
+                        "flex-wrap": "wrap",
+                        "gap": "12px",
+                        "display": "flex",
+                        "flex-direction": "row",
+                    }
+                },
+            ],
+            style: {
+                display: "flex",
+                "gap": "12px",
+                "flex-flow": "row",
+                "flex-grow": "0.5",
+                "padding": "24px",
+                "padding-top": "0",
+            }
         },
         tag: {
             "name": "Span-0",
