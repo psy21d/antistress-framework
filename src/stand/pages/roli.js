@@ -7,6 +7,23 @@
 
 export default {
     components: {
+        page: {
+            "name": "Form-0",
+            "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
+            components: [
+                {
+                    name: "gridbox"
+                },
+                {
+                    name: "addmore"
+                }
+            ],
+            style: {
+                padding: "32px",
+                "background-color": "rgb(232, 232, 233)",
+                "min-height": "100vh"
+            }
+        },
         gridbox: {
             "name": "Form-0",
             "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
@@ -42,7 +59,6 @@ export default {
                 "-webkit-align-items": "stretch",
                 "-ms-flex-align": "stretch",
                 "align-items": "stretch",
-                padding: "32px",
                 gap: "32px",
                 "justify-content": "center"
             }
@@ -83,9 +99,9 @@ export default {
                 "height": "35vw",
                 "max-height": "400px",
                 "width": "26vw",
-                "border": "1px solid #ccc",
                 "border-radius": "8px",
                 overflow: "hidden",
+                "background-color": "#fff"
             },
             storemix: {
                 maintext: "From card-component",
@@ -97,9 +113,8 @@ export default {
             // important: we can get it from config directly
             components: "@tags",
             style: {
-                "flex-grow": "0.2",
                 "padding": "0",
-                "gap": "12px",
+                "row-gap": "12px",
                 "display": "flex",
                 "justify-items": "center",
                 "flex-glow": "row"
@@ -112,6 +127,7 @@ export default {
             style: {
                 "flex-grow": "0.5",
                 "padding": "24px",
+                "padding-bottom": "12px",
             }
         },
         date: {
@@ -129,10 +145,12 @@ export default {
                 {
                     name: "textcard",
                     style: {
+                        "padding": "0",
+                        "column-gap": "12px",
                         "flex-wrap": "wrap",
-                        "gap": "12px",
                         "display": "flex",
-                        "flex-direction": "row",
+                        "justify-items": "center",
+                        "flex-glow": "row"
                     }
                 },
             ],
@@ -143,15 +161,66 @@ export default {
                 "flex-grow": "0.5",
                 "padding": "24px",
                 "padding-top": "0",
+                "padding-bottom": "12px",
             }
         },
         tag: {
             "name": "Span-0",
             "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
+        },
+        addmore: {
+            "name": "Button-0",
+            "url": "http://yourfriend.best:8080/components/Button/Button-0.umd.js",
+            storemix: {
+                "addmore": "Add another card +"
+            },
+            store: "addmore",
+            style: {
+                margin: "32px",
+            },
+            methods: {
+                "click": "mockable",
+            }
         }
     },
     composition: {
-        point: "gridbox"
+        point: "page"
+    },
+    methods: {
+        mockable: `({store, config, storemix, componentConfig }) =>  {
+            config.components.gridbox.components.push({
+                name: "card",
+                storemix: {
+                    maintext: "maintext",
+                    "card-image": "url(https://d1ag85ptixulvl.cloudfront.net/k28kmvrzx80m/16Uk3PJjbc9eJPKoMvjPr4/9070b9f806b18c07c7957e7e0f6220a2/2021-12_Pensacola_Mist_LUMI_SE_-_Blog__2x.jpg?w=512&q=90&fl=progressive&fit=fill&h=332)",
+                    "date": "Undated",
+                    tags: [{
+                        name: "tag",
+                        store: "ta",
+                        storemix: {
+                            ta: "tag AA"
+                        }
+                    },
+                    {
+                        name: "tag",
+                        store: "tb",
+                        storemix: {
+                            tb: "tag AB"
+                        }
+                    },
+                    {
+                        name: "tag",
+                        store: "tc",
+                        storemix: {
+                            tc: "tag AC"
+                        }
+                    }],
+                    ta: "tag A",
+                    tb: "tag B",
+                    tc: "tag C",
+                }
+            })
+        }`
     },
     store: {
         "gridbox": {
