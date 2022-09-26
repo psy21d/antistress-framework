@@ -30,15 +30,33 @@ export default {
             storedata: "gridbox",
             storemix: {
                 maintext: "!!! Seaboard RISE 2: First Touch | Madeon",
+            },
+            style: {
+                display: "flex",
+                width: "100%",
+                "max-width": "1200px",
+                "-webkit-flex-wrap": "wrap",
+                "-ms-flex-wrap": "wrap",
+                "flex-wrap": "wrap",
+                "-webkit-box-align": "stretch",
+                "-webkit-align-items": "stretch",
+                "-ms-flex-align": "stretch",
+                "align-items": "stretch",
+                padding: "32px",
+                gap: "32px",
+                "justify-content": "center"
             }
         },
         photo: {
             "name": "Div-0",
             "url": "http://yourfriend.best:8080/components/Div/Div-0.umd.js",
             style: {
+                display: "block",
+                height: "50%",
+                "flex-grow": "0",
                 "background-image": "@card-image",
-                "width": "100px",
-                "height": "100px",
+                "min-height": "100px",
+                "background-size": "cover"
             }
         },
         card: {
@@ -56,17 +74,42 @@ export default {
                     name: "textcard",
                 },
             ],
+            style: {
+                "display": "flex",
+                "flex-direction": "column",
+                "min-width": "230px",
+                "max-width": "300px",
+                "min-height": "280px",
+                "height": "35vw",
+                "max-height": "400px",
+                "width": "26vw",
+                "border": "1px solid #ccc",
+                "border-radius": "8px",
+                overflow: "hidden",
+            }
         },
         textcard: {
             "name": "Form-0",
             "url": "http://yourfriend.best:8080/components/Form/Form-0.umd.js",
             // important: we can get it from config directly
             components: "@tags",
+            style: {
+                "flex-grow": "0.2",
+                "padding": "24px",
+                "padding-top": "0",
+                "gap": "12px",
+                "display": "flex",
+                "justify-items": "row"
+            }
         },
         maintext: {
             "name": "Span-0",
             "url": "http://yourfriend.best:8080/components/Span/Span-0.umd.js",
-            store: "maintext"
+            store: "maintext",
+            style: {
+                "flex-grow": "0.5",
+                "padding": "24px",
+            }
         },
         date: {
             "name": "Span-0",

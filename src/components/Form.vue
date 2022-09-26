@@ -9,6 +9,7 @@
 import { 
   getComponentByName,
   getSomeValueFromStore,
+  makeLinksWithStore,
 } from "@/core/service.js";
 
 export default {
@@ -37,6 +38,7 @@ export default {
       props,
       ...props,
       getComponentByName,
+      makeLinksWithStore,
       };
   },
 };
@@ -48,10 +50,11 @@ export default {
   {{ componentConfig }}
   <br /><br /><br /><br /> -->
   <div
-    v-if="config.style || config.class"
-    :style="makeLinksWithStore({ config, json: { ...componentConfig.style } })"
-    :class="makeLinksWithStore({ config, json: { ...componentConfig.class } })"
+    v-if="componentConfig.style || componentConfig.class"
+    :style="makeLinksWithStore({ store: config.store, json: { ...componentConfig.style } })"
+    :class="makeLinksWithStore({ store: config.store, json: { ...componentConfig.class } })"
   >
+  {{ config.style }}
     <component
       :key="c"
       :store="

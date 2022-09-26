@@ -61,7 +61,6 @@ export const getSomeValueFromStore = ({store, value }) => {
 
 export const makeLinksWithStore = ({store, json }) => {
     let r = reactive({})
-    debugger;
     Object.keys(json).forEach(key => {
         r[key] = getSomeValueFromStore({ store, value: json[key] })
     })
